@@ -1,3 +1,30 @@
+receitas = [
+    {
+        "descricao": "Salário",
+        "valor": 1500.000,
+    },
+    {
+        "descricao": "Freelance",
+        "valor": 350.00,
+    },
+    {
+        "descricao": "Presente",
+        "valor": 100.00
+    }
+]
+
+def registrar_receita():
+    descricao = input("Digite a descrição: ")
+
+    valor = float(input("Digite o valor: ").replace(",", "."))
+
+    receita = {
+        "descricao": descricao,
+        "valor": valor
+    }
+
+    receitas.append(receita)
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -12,6 +39,10 @@ while True:
 
     if opcao == "1":
         print("Registrar receita.")
+        
+        registrar_receita()
+
+        print("Registrado!")
     elif opcao == "2":
         print("Registrar despesa")
     elif opcao == "3":
@@ -20,6 +51,6 @@ while True:
         print("Listar movimentações")
     elif opcao == "5":
         print("Saindo...")
-        exit()
+        break
     else:
         print("Opção inválida")
