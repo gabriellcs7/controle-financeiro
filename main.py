@@ -25,6 +25,10 @@ def registrar_receita():
 
     receitas.append(receita)
 
+def listar_receitas():
+    for receita in receitas:
+        print(receita)
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -48,7 +52,8 @@ while True:
     elif opcao == "3":
         print("Consultar saldo")
     elif opcao == "4":
-        print("Listar movimentações")
+        print("=========== RECEITAS CADASTRADAS ===========")
+        listar_receitas()
     elif opcao == "5":
         print("Saindo...")
         break
