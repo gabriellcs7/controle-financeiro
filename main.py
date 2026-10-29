@@ -24,6 +24,7 @@ def registrar_receita():
     }
 
     receitas.append(receita)
+    print("Receita registrada com sucesso!")
 
 def listar_receitas():
     for receita in receitas:
@@ -36,6 +37,33 @@ def calcular_receitas():
         total += receita['valor']
 
     print(f"Total de receitas: R$ {total:.2f}")
+
+despesas = []
+
+def registrar_despesa():
+    descricao = input("Digite a descricao: ")
+    valor = float(input("Digite o valor: ").replace(",", "."))
+
+    despesa = {
+        "descricao": descricao,
+        "valor": valor
+    }
+
+    despesas.append(despesa)
+    print("Despesa registrada com sucesso!")
+
+
+def listar_despesas():
+    for despesa in despesas:
+        print(f"Descrição: {despesa['descricao']} | Valor: R$ {despesa['valor']:.2f}")
+
+def calcular_despesas():
+    total = 0
+
+    for despesa in despesas:
+        total += despesa['valor']
+
+    print(f"Total de despesas: R$ {total:.2f}")
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
@@ -50,13 +78,11 @@ while True:
     opcao = input("Selecione uma opção: ")
 
     if opcao == "1":
-        print("Registrar receita.")
-        
+        print("========== REGISTRAR RECEITA ==========")
         registrar_receita()
-
-        print("Registrado!")
     elif opcao == "2":
-        print("Registrar despesa")
+        print("========== REGISTRAR DESPESA ==========")
+        registrar_despesa()
     elif opcao == "3":
         print("Consultar saldo")
     elif opcao == "4":
@@ -64,6 +90,10 @@ while True:
         listar_receitas()
         print("--------------------------------------------")
         calcular_receitas()
+        print("=========== DESPESAS CADASTRADAS ===========")
+        listar_despesas()
+        print("--------------------------------------------")
+        calcular_despesas()
     elif opcao == "5":
         print("Saindo...")
         break
