@@ -1,5 +1,14 @@
 import json
 
+def carregar_despesas():
+    try:
+        with open("despesas.json", "r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+            return dados
+
+    except FileNotFoundError:
+        return []
+
 receitas = [
     {
         "descricao": "Salário",
@@ -40,7 +49,7 @@ def calcular_receitas():
 
     return total
 
-despesas = []
+despesas = carregar_despesas()
 
 def registrar_despesa():
     descricao = validar_descricao()
