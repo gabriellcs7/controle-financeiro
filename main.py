@@ -179,6 +179,27 @@ def excluir_despesas():
     except ValueError:
         print("Erro! Digite um número válido!")
 
+def excluir_receitas():
+    if not receitas:
+        print("Nenhuma receita cadastrada.")
+        return
+
+    for indice, receita in enumerate(receitas, start=1):
+        print(f"{indice} - {receita['descricao']}")
+
+    try:
+        opcao = int(input("Digite o número da receita que deseja excluir: "))
+
+        if 1 <= opcao <= len(receitas):
+            receitas.pop(opcao - 1)
+            salvar_dados("receitas.json", receitas)
+            print("Receita excluída com sucesso!")
+        else:
+            print("Receita não encontrada")
+
+    except ValueError:
+        print("Erro! Digite um número válido!")
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -186,8 +207,9 @@ def exibir_menu():
     print("3 - Consultar saldo")
     print("4 - Listar movimentações")
     print("5 - Relatório por categoria")
-    print("6 - Excluir despesa")
-    print("7 - Sair")
+    print("6 - Excluir receita")
+    print("7 - Excluir despesa")
+    print("8 - Sair")
 
 while True:
     exibir_menu()
@@ -214,9 +236,12 @@ while True:
     elif opcao == "5":
         relatorio_categorias()
     elif opcao == "6":
+        print("=========== EXCLUIR RECEITAS ===========")
+        excluir_receitas()
+    elif opcao == "7":
         print("=========== EXCLUIR DESPESAS ===========")
         excluir_despesas()
-    elif opcao == "7":
+    elif opcao == "8":
         print("Saindo...")
         break
     else:
