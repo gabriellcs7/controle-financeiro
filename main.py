@@ -1,3 +1,5 @@
+import json
+
 receitas = [
     {
         "descricao": "Salário",
@@ -52,6 +54,7 @@ def registrar_despesa():
     }
 
     despesas.append(despesa)
+    salvar_despesas()
     print("Despesa registrada com sucesso!")
 
 
@@ -153,6 +156,12 @@ def relatorio_categorias():
     for categoria, valor in totais.items():
 
         print(f"{categoria}: R${valor:.2f}")
+
+def salvar_despesas():
+    with open("despesas.json", "w", encoding="utf-8") as arquivo:
+        json.dump(despesas, arquivo, indent=4, ensure_ascii=False)
+        
+    print("Despesas salvas com sucesso!")
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
