@@ -9,20 +9,16 @@ def carregar_despesas():
     except FileNotFoundError:
         return []
 
-receitas = [
-    {
-        "descricao": "Salário",
-        "valor": 1500.000,
-    },
-    {
-        "descricao": "Freelance",
-        "valor": 350.00,
-    },
-    {
-        "descricao": "Presente",
-        "valor": 100.00
-    }
-]
+def carregar_receitas():
+    try:
+        with open("receitas.json", "r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+            return dados
+
+    except FileNotFoundError:
+        return []
+
+receitas = carregar_receitas()
 
 def registrar_receita():
     descricao = validar_descricao()
@@ -35,6 +31,7 @@ def registrar_receita():
     }
 
     receitas.append(receita)
+    salvar_dados("receitas.json", receitas)
     print("Receita registrada com sucesso!")
 
 def listar_receitas():
@@ -63,7 +60,7 @@ def registrar_despesa():
     }
 
     despesas.append(despesa)
-    salvar_despesas()
+    salvar_dados("despesas.json", despesas)
     print("Despesa registrada com sucesso!")
 
 
@@ -166,11 +163,9 @@ def relatorio_categorias():
 
         print(f"{categoria}: R${valor:.2f}")
 
-def salvar_despesas():
-    with open("despesas.json", "w", encoding="utf-8") as arquivo:
-        json.dump(despesas, arquivo, indent=4, ensure_ascii=False)
-        
-    print("Despesas salvas com sucesso!")
+def salvar_dados(nome_arquivo, dados):
+    with open(nome_arquivo, "w", encoding="utf-8") as arquivo:
+        json.dump(dados, arquivo, indent=4, ensure_ascii=False)
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
