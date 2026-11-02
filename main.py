@@ -1,24 +1,14 @@
 import json
 
-def carregar_despesas():
+def carregar_dados(nome_arquivo):
     try:
-        with open("despesas.json", "r", encoding="utf-8") as arquivo:
-            dados = json.load(arquivo)
-            return dados
-
+        with open(nome_arquivo, "r", encoding="utf-8") as arquivo:
+            return json.load(arquivo)
+             
     except FileNotFoundError:
         return []
 
-def carregar_receitas():
-    try:
-        with open("receitas.json", "r", encoding="utf-8") as arquivo:
-            dados = json.load(arquivo)
-            return dados
-
-    except FileNotFoundError:
-        return []
-
-receitas = carregar_receitas()
+receitas = carregar_dados("receitas.json")
 
 def registrar_receita():
     descricao = validar_descricao()
@@ -46,7 +36,7 @@ def calcular_receitas():
 
     return total
 
-despesas = carregar_despesas()
+despesas = carregar_dados("despesas.json")
 
 def registrar_despesa():
     descricao = validar_descricao()
