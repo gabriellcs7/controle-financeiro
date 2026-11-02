@@ -158,44 +158,23 @@ def salvar_dados(nome_arquivo, dados):
     with open(nome_arquivo, "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, indent=4, ensure_ascii=False)
 
-def excluir_despesas():
-    if not despesas:
-        print("Nenhuma despesa cadastrada.")
+def excluir_dados(dados, nome_arquivo, tipo):
+    if not dados:
+        print(f"Nenhuma {tipo.lower()} cadastrada.")
         return
 
-    for indice, despesa in enumerate(despesas, start=1):
-        print(f"{indice} - {despesa['descricao']}")
+    for indice, item in enumerate(dados, start=1):
+        print(f"{indice} - {item['descricao']}")
 
     try:
-        opcao = int(input("Digite o número da despesa que deseja excluir: "))
+        opcao = int(input(f"Digite o número da {tipo.lower()} que deseja excluir: "))
 
-        if 1 <= opcao <= len(despesas):
-            despesas.pop(opcao - 1)
-            salvar_dados("despesas.json", despesas)
-            print("Despesa excluída com sucesso!")
+        if 1 <= opcao <= len(dados):
+            dados.pop(opcao - 1)
+            salvar_dados(nome_arquivo, dados)
+            print(f"{tipo} excluída com sucesso!")
         else:
-            print("Despesa não encontrada.")
-
-    except ValueError:
-        print("Erro! Digite um número válido!")
-
-def excluir_receitas():
-    if not receitas:
-        print("Nenhuma receita cadastrada.")
-        return
-
-    for indice, receita in enumerate(receitas, start=1):
-        print(f"{indice} - {receita['descricao']}")
-
-    try:
-        opcao = int(input("Digite o número da receita que deseja excluir: "))
-
-        if 1 <= opcao <= len(receitas):
-            receitas.pop(opcao - 1)
-            salvar_dados("receitas.json", receitas)
-            print("Receita excluída com sucesso!")
-        else:
-            print("Receita não encontrada")
+            print(f"{tipo} não encontrada.")
 
     except ValueError:
         print("Erro! Digite um número válido!")
@@ -237,10 +216,10 @@ while True:
         relatorio_categorias()
     elif opcao == "6":
         print("=========== EXCLUIR RECEITAS ===========")
-        excluir_receitas()
+        excluir_dados(receitas, "receitas.json", "Receita")
     elif opcao == "7":
         print("=========== EXCLUIR DESPESAS ===========")
-        excluir_despesas()
+        excluir_dados(despesas, "despesas.json", "Despesa")
     elif opcao == "8":
         print("Saindo...")
         break
