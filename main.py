@@ -1,4 +1,5 @@
 import json
+import math
 
 def carregar_dados(nome_arquivo):
     try:
@@ -80,8 +81,8 @@ def validar_valor():
     while True:
         try:
             valor = float(input("Digite o valor: ").replace(",", "."))
-            if valor <= 0:
-                print("Erro! O valor deve ser maior que 0.")
+            if valor <= 0 or not math.isfinite(valor):
+                print("Erro! Digite um valor positivo e válido!")
             else:
                 return valor
         except ValueError:
@@ -157,6 +158,27 @@ def salvar_dados(nome_arquivo, dados):
     with open(nome_arquivo, "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, indent=4, ensure_ascii=False)
 
+def excluir_despesas():
+    if not despesas:
+        print("Nenhuma despesa cadastrada.")
+        return
+
+    for indice, despesa in enumerate(despesas, start=1):
+        print(f"{indice} - {despesa['descricao']}")
+
+    try:
+        opcao = int(input("Digite o número da despesa que deseja excluir: "))
+
+        if 1 <= opcao <= len(despesas):
+            despesas.pop(opcao - 1)
+            salvar_dados("despesas.json", despesas)
+            print("Despesa excluída com sucesso!")
+        else:
+            print("Despesa não encontrada.")
+
+    except ValueError:
+        print("Erro! Digite um número válido!")
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -164,7 +186,8 @@ def exibir_menu():
     print("3 - Consultar saldo")
     print("4 - Listar movimentações")
     print("5 - Relatório por categoria")
-    print("6 - Sair")
+    print("6 - Excluir despesa")
+    print("7 - Sair")
 
 while True:
     exibir_menu()
@@ -191,6 +214,9 @@ while True:
     elif opcao == "5":
         relatorio_categorias()
     elif opcao == "6":
+        print("=========== EXCLUIR DESPESAS ===========")
+        excluir_despesas()
+    elif opcao == "7":
         print("Saindo...")
         break
     else:
