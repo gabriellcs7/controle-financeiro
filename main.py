@@ -43,10 +43,12 @@ despesas = []
 def registrar_despesa():
     descricao = validar_descricao()
     valor = validar_valor()
+    categoria = selecionar_categoria()
 
     despesa = {
         "descricao": descricao,
-        "valor": valor
+        "valor": valor,
+        "categoria": categoria
     }
 
     despesas.append(despesa)
@@ -55,7 +57,7 @@ def registrar_despesa():
 
 def listar_despesas():
     for despesa in despesas:
-        print(f"Descrição: {despesa['descricao']} | Valor: R$ {despesa['valor']:.2f}")
+        print(f"Descrição: {despesa['descricao']} | Valor: R$ {despesa['valor']:.2f} | Categoria: {despesa['categoria']}")
 
 def calcular_despesas():
     total = 0
@@ -96,6 +98,39 @@ def validar_descricao():
             print("Erro! A descrição não pode ser apenas um número.")
         else:
             return descricao
+
+def selecionar_categoria():
+    print("========== CATEGORIAS ==========")
+    print("1 - Alimentação")
+    print("2 - Transporte")
+    print("3 - Moradia")
+    print("4 - Lazer")
+    print("5 - Saúde")
+    print("6 - Educação")
+    print("7 - Tecnologia")
+    print("8 - Outros")
+
+    while True:
+        opcao = input("Selecione uma opção: ") 
+    
+        if opcao == "1":
+            return "Alimentação"
+        elif opcao == "2":
+            return "Transporte"
+        elif opcao == "3":
+            return "Moradia"
+        elif opcao == "4":
+            return "Lazer"
+        elif opcao == "5":
+            return "Saúde"
+        elif opcao == "6":
+            return "Educação"
+        elif opcao == "7":
+            return "Tecnologia"
+        elif opcao == "8":
+            return "Outros"
+        else:
+            print("Opção inválida")
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
