@@ -73,9 +73,9 @@ def consultar_saldo():
 
     saldo = total_receitas - total_despesas
 
-    print(f"Total de receitas: {total_receitas:.2f}")
-    print(f"Total de despesas: {total_despesas:.2f}")
-    print(f"Saldo disponível: {saldo:.2f}")
+    print(f"Total de receitas: R$ {total_receitas:.2f}")
+    print(f"Total de despesas: R$ {total_despesas:.2f}")
+    print(f"Saldo disponível: R$ {saldo:.2f}")
 
 def validar_valor():
     while True:
@@ -132,13 +132,36 @@ def selecionar_categoria():
         else:
             print("Opção inválida")
 
+def relatorio_categorias():
+    totais = {}
+
+    if not despesas:
+        print("Nenhuma despesa cadastrada")
+        return
+
+    for despesa in despesas:
+        categoria = despesa["categoria"]
+        valor = despesa["valor"]
+
+        if categoria in totais:
+            totais[categoria] += valor
+        else:
+            totais[categoria] = valor
+
+    print("========== RELATÓRIO POR CATEGORIA ==========")
+
+    for categoria, valor in totais.items():
+
+        print(f"{categoria}: R${valor:.2f}")
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
     print("2 - Registrar despesa")
     print("3 - Consultar saldo")
     print("4 - Listar movimentações")
-    print("5 - Sair")
+    print("5 - Relatório por categoria")
+    print("6 - Sair")
 
 while True:
     exibir_menu()
@@ -163,6 +186,8 @@ while True:
         print("--------------------------------------------")
         print(f"Total de despesas: R$ {calcular_despesas():.2f}")
     elif opcao == "5":
+        relatorio_categorias()
+    elif opcao == "6":
         print("Saindo...")
         break
     else:
