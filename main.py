@@ -14,7 +14,7 @@ receitas = [
 ]
 
 def registrar_receita():
-    descricao = input("Digite a descrição: ")
+    descricao = validar_descricao()
 
     valor = validar_valor()
 
@@ -41,7 +41,7 @@ def calcular_receitas():
 despesas = []
 
 def registrar_despesa():
-    descricao = input("Digite a descricao: ")
+    descricao = validar_descricao()
     valor = validar_valor()
 
     despesa = {
@@ -85,6 +85,17 @@ def validar_valor():
                 return valor
         except ValueError:
             print("Erro! Digite um número válido.")
+
+def validar_descricao():
+    while True:
+        descricao = input("Digite a descrição: ").strip()
+
+        if descricao == "":
+            print("Erro! Digite algo na descrição.")
+        elif descricao.isdigit():
+            print("Erro! A descrição não pode ser apenas um número.")
+        else:
+            return descricao
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
