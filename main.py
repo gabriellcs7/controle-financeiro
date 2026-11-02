@@ -16,7 +16,7 @@ receitas = [
 def registrar_receita():
     descricao = input("Digite a descrição: ")
 
-    valor = float(input("Digite o valor: ").replace(",", "."))
+    valor = validar_valor()
 
     receita = {
         "descricao": descricao,
@@ -42,7 +42,7 @@ despesas = []
 
 def registrar_despesa():
     descricao = input("Digite a descricao: ")
-    valor = float(input("Digite o valor: ").replace(",", "."))
+    valor = validar_valor()
 
     despesa = {
         "descricao": descricao,
@@ -74,6 +74,17 @@ def consultar_saldo():
     print(f"Total de receitas: {total_receitas:.2f}")
     print(f"Total de despesas: {total_despesas:.2f}")
     print(f"Saldo disponível: {saldo:.2f}")
+
+def validar_valor():
+    while True:
+        try:
+            valor = float(input("Digite o valor: ").replace(",", "."))
+            if valor <= 0:
+                print("Erro! O valor deve ser maior que 0.")
+            else:
+                return valor
+        except ValueError:
+            print("Erro! Digite um número válido.")
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
