@@ -179,6 +179,29 @@ def excluir_dados(dados, nome_arquivo, tipo):
     except ValueError:
         print("Erro! Digite um número válido!")
 
+def editar_valor_despesa():
+    if not despesas:
+        print("Nenhuma despesa cadastrada.")
+        return
+
+    for indice, despesa in enumerate(despesas, start=1):
+        print(f"{indice} - {despesa['descricao']} | R$ {despesa['valor']:.2f}")
+
+    try:
+        opcao = int(input("Digite o número da despesa que deseja editar: "))
+
+        if 1 <= opcao <= len(despesas):
+            novo_valor = validar_valor()
+
+            despesas[opcao - 1]['valor'] = novo_valor
+            salvar_dados("despesas.json", despesas)
+            print("Despesa editada com sucesso!")
+        else:
+            print("Despesa não encontrada.")
+
+    except ValueError:
+        print("Erro! Digite um número válido!")
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
