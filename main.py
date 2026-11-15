@@ -179,28 +179,29 @@ def excluir_dados(dados, nome_arquivo, tipo):
     except ValueError:
         print("Erro! Digite um número válido!")
 
-def editar_valor_despesa():
-    if not despesas:
-        print("Nenhuma despesa cadastrada.")
+def editar_valor(dados, nome_arquivo, tipo):
+    if not dados:
+        print(f"Nenhuma {tipo.lower()} cadastrada.")
         return
 
-    for indice, despesa in enumerate(despesas, start=1):
-        print(f"{indice} - {despesa['descricao']} | R$ {despesa['valor']:.2f}")
+    for indice, item in enumerate(dados, start=1):
+        print(f"{indice} - {item['descricao']} | R$ {item['valor']:.2f}")
 
     try:
-        opcao = int(input("Digite o número da despesa que deseja editar: "))
+        opcao = int(input(f"Digite o número da {tipo.lower()} que deseja editar: "))
 
-        if 1 <= opcao <= len(despesas):
+        if 1 <= opcao <= len(dados):
             novo_valor = validar_valor()
 
-            despesas[opcao - 1]['valor'] = novo_valor
-            salvar_dados("despesas.json", despesas)
-            print("Despesa editada com sucesso!")
+            dados[opcao - 1]['valor'] = novo_valor
+            salvar_dados(nome_arquivo, dados)
+            print(f"{tipo} editada com sucesso!") 
+
         else:
-            print("Despesa não encontrada.")
+            print(f"{tipo} não encontrada.")
 
     except ValueError:
-        print("Erro! Digite um número válido!")
+            print("Erro! Digite um número válido!")
 
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
@@ -211,7 +212,10 @@ def exibir_menu():
     print("5 - Relatório por categoria")
     print("6 - Excluir receita")
     print("7 - Excluir despesa")
-    print("8 - Sair")
+    print("8 - Editar receita")
+    print("9 - Editar despesa")
+    print("10 - Sair")
+    
 
 while True:
     exibir_menu()
@@ -244,6 +248,12 @@ while True:
         print("=========== EXCLUIR DESPESAS ===========")
         excluir_dados(despesas, "despesas.json", "Despesa")
     elif opcao == "8":
+        print("=========== EDITAR RECEITAS ===========")
+        editar_valor(receitas, "receitas.json", "Receita")
+    elif opcao == "9":
+        print("=========== EDITAR DESPESAS ===========")
+        editar_valor(despesas, "despesas.json", "Despesa")
+    elif opcao == "10":
         print("Saindo...")
         break
     else:
