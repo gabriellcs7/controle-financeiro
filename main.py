@@ -170,6 +170,12 @@ def excluir_dados(dados, nome_arquivo, tipo):
         opcao = int(input(f"Digite o número da {tipo.lower()} que deseja excluir: "))
 
         if 1 <= opcao <= len(dados):
+            item_selecionado = dados[opcao - 1]
+
+            print("========== MOVIMENTAÇÃO SELECIONADA ==========")
+            print(f"Descrição: {item_selecionado['descricao']}")
+            print(f"Valor: R$ {item_selecionado['valor']:.2f}")
+
             confirmacao = input(f"Deseja realmente excluir essa {tipo.lower}? (s/n)").strip().lower()
             if confirmacao == "s":
                 dados.pop(opcao - 1)
