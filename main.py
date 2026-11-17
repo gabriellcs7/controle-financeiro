@@ -176,6 +176,9 @@ def excluir_dados(dados, nome_arquivo, tipo):
             print(f"Descrição: {item_selecionado['descricao']}")
             print(f"Valor: R$ {item_selecionado['valor']:.2f}")
 
+            if "categoria" in item_selecionado:
+                print(f"Categoria: {item_selecionado['categoria']}")
+
             confirmacao = input(f"Deseja realmente excluir essa {tipo.lower}? (s/n)").strip().lower()
             if confirmacao == "s":
                 dados.pop(opcao - 1)
