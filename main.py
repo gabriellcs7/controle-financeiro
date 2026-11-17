@@ -228,6 +228,29 @@ def editar_descricao(dados, nome_arquivo, tipo):
     except ValueError:
         print("Erro! Digite um número válido!")
 
+def editar_categoria(dados, nome_arquivo):
+    if not dados:
+        print("Nenhuma despesa cadastrada.")
+        return
+
+    for indice, despesa in enumerate(dados, start=1):
+        print(f"{indice} - {despesa['descricao']} | Categoria: {despesa['categoria']}")
+
+    try:
+        opcao = int(input("Digite o número da despesa que deseja editar: "))
+
+        if 1 <= opcao <= len(dados):
+            
+            nova_categoria = selecionar_categoria()
+            dados[opcao - 1]['categoria'] = nova_categoria
+            salvar_dados(nome_arquivo, dados)
+
+            print("Categoria editada com sucesso!")
+        else:
+            print("Despesa não encontrada.")
+    except ValueError:
+        print("Erro! Digite um número válido!")
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -241,7 +264,8 @@ def exibir_menu():
     print("9 - Editar despesa")
     print("10 - Editar descrição da receita")
     print("11 - Editar descrição da despesa")
-    print("12 - Sair")
+    print("12 - Editar categoria de despesa")
+    print("13 - Sair")
     
 
 while True:
@@ -288,6 +312,9 @@ while True:
         print("=========== EDITAR DESCRIÇÃO DE DESPESAS ===========")
         editar_descricao(despesas, "despesas.json", "Despesa")
     elif opcao == "12":
+        print("=========== EDITAR CATEGORIA DE DESPESAS ===========")
+        editar_categoria(despesas, "despesas.json")
+    elif opcao == "13":
         print("Saindo...")
         break
     else:
