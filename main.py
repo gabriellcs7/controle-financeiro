@@ -170,9 +170,16 @@ def excluir_dados(dados, nome_arquivo, tipo):
         opcao = int(input(f"Digite o número da {tipo.lower()} que deseja excluir: "))
 
         if 1 <= opcao <= len(dados):
-            dados.pop(opcao - 1)
-            salvar_dados(nome_arquivo, dados)
-            print(f"{tipo} excluída com sucesso!")
+            confirmacao = input(f"Deseja realmente excluir essa {tipo.lower}? (s/n)").strip().lower()
+            if confirmacao == "s":
+                dados.pop(opcao - 1)
+                salvar_dados(nome_arquivo, dados)
+                print(f"{tipo} excluída com sucesso!")
+            elif confirmacao == "n":
+                print("Exclusão cancelada.")
+                return
+            else:
+                print("Resposta inválida. Exclusão cancelada.")
         else:
             print(f"{tipo} não encontrada.")
 
