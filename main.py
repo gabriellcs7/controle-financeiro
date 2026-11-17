@@ -263,7 +263,7 @@ def exibir_menu_edicao():
 def menu_edicao():
     while True:
         exibir_menu_edicao()
-        opcao = input("Selecione uma opção")
+        opcao = input("Selecione uma opção: ")
 
         if opcao == "1":
             editar_valor(receitas, "receitas.json", "Receita")
@@ -281,6 +281,27 @@ def menu_edicao():
         else:
             print("Opção inválida")
 
+def exibir_menu_exclusao():
+    print("========== EXCLUIR DADOS ==========")
+    print("1 - Excluir receita")
+    print("2 - Excluir despesa")
+    print("3 - Voltar ao menu principal")
+
+def menu_exclusao():
+    while True:
+        exibir_menu_exclusao()
+        opcao = input("Selecione uma opção: ")
+
+        if opcao == "1":
+            excluir_dados(receitas, "receitas.json", "Receita")
+        elif opcao == "2":
+            excluir_dados(despesas, "despesas.json", "Despesa")
+        elif opcao == "3":
+            print("Voltando ao menu principal...")
+            break
+        else: 
+            print("Opção inválida")
+
 def exibir_menu():  
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -288,10 +309,9 @@ def exibir_menu():
     print("3 - Consultar saldo")
     print("4 - Listar movimentações")
     print("5 - Relatório por categoria")
-    print("6 - Excluir receita")
-    print("7 - Excluir despesa")
-    print("8 - Editar dados")
-    print("9 - Sair")
+    print("6 - Excluir dados")
+    print("7 - Editar dados")
+    print("8 - Sair")
     
 
 while True:
@@ -319,14 +339,10 @@ while True:
     elif opcao == "5":
         relatorio_categorias()
     elif opcao == "6":
-        print("=========== EXCLUIR RECEITAS ===========")
-        excluir_dados(receitas, "receitas.json", "Receita")
+        menu_exclusao()
     elif opcao == "7":
-        print("=========== EXCLUIR DESPESAS ===========")
-        excluir_dados(despesas, "despesas.json", "Despesa")
-    elif opcao == "8":
         menu_edicao()
-    elif opcao == "9":
+    elif opcao == "8":
         print("Saindo...")
         break
     else:
