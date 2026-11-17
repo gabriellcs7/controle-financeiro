@@ -203,6 +203,31 @@ def editar_valor(dados, nome_arquivo, tipo):
     except ValueError:
             print("Erro! Digite um número válido!")
 
+def editar_descricao(dados, nome_arquivo, tipo):
+    if not dados:
+        print(f"Nenhuma {tipo.lower()} cadastrada.")
+        return
+
+    for indice, item in enumerate(dados, start=1):
+        print(f"{indice} - {item['descricao']}")
+
+    try:
+        opcao = int(input(f"Digite o número da {tipo.lower()} que deseja editar: "))
+
+        if 1 <= opcao <= len(dados):
+
+            nova_descricao = validar_descricao()
+            dados[opcao - 1]['descricao'] = nova_descricao
+            salvar_dados(nome_arquivo, dados)
+
+            print(f"Descrição da {tipo.lower()} editada com sucesso!")
+
+        else:
+            print(f"{tipo} não encontrada.")
+
+    except ValueError:
+        print("Erro! Digite um número válido!")
+
 def exibir_menu():
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
@@ -214,7 +239,9 @@ def exibir_menu():
     print("7 - Excluir despesa")
     print("8 - Editar receita")
     print("9 - Editar despesa")
-    print("10 - Sair")
+    print("10 - Editar descrição da receita")
+    print("11 - Editar descrição da despesa")
+    print("12 - Sair")
     
 
 while True:
@@ -254,6 +281,13 @@ while True:
         print("=========== EDITAR DESPESAS ===========")
         editar_valor(despesas, "despesas.json", "Despesa")
     elif opcao == "10":
+        print("=========== EDITAR DESCRIÇÃO DE RECEITAS ===========")
+        editar_descricao(receitas, "receitas.json", "Receita")
+        break
+    elif opcao == "11":
+        print("=========== EDITAR DESCRIÇÃO DE DESPESAS ===========")
+        editar_descricao(despesas, "despesas.json", "Despesa")
+    elif opcao == "12":
         print("Saindo...")
         break
     else:
