@@ -1,5 +1,6 @@
 import json
 import math
+from datetime import datetime
 
 def carregar_dados(nome_arquivo):
     try:
@@ -13,12 +14,13 @@ receitas = carregar_dados("receitas.json")
 
 def registrar_receita():
     descricao = validar_descricao()
-
     valor = validar_valor()
+    data_atual = datetime.now().strftime("%d/%m/%Y")
 
     receita = {
         "descricao": descricao,
-        "valor": valor
+        "valor": valor,
+        "data": data_atual
     }
 
     receitas.append(receita)
@@ -43,11 +45,13 @@ def registrar_despesa():
     descricao = validar_descricao()
     valor = validar_valor()
     categoria = selecionar_categoria()
+    data_atual = datetime.now().strftime("%d/%m/%Y")
 
     despesa = {
         "descricao": descricao,
         "valor": valor,
-        "categoria": categoria
+        "categoria": categoria,
+        "data": data_atual
     }
 
     despesas.append(despesa)
@@ -179,7 +183,7 @@ def excluir_dados(dados, nome_arquivo, tipo):
             if "categoria" in item_selecionado:
                 print(f"Categoria: {item_selecionado['categoria']}")
 
-            confirmacao = input(f"Deseja realmente excluir essa {tipo.lower}? (s/n)").strip().lower()
+            confirmacao = input(f"Deseja realmente excluir essa {tipo.lower}? (s/n): ").strip().lower()
             if confirmacao == "s":
                 dados.pop(opcao - 1)
                 salvar_dados(nome_arquivo, dados)
