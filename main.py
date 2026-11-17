@@ -251,7 +251,37 @@ def editar_categoria(dados, nome_arquivo):
     except ValueError:
         print("Erro! Digite um número válido!")
 
-def exibir_menu():
+def exibir_menu_edicao():
+    print("========== EDITAR DADOS ==========")
+    print("1 - Editar receita")
+    print("2 - Editar despesa")
+    print("3 - Editar descrição da receita")
+    print("4 - Editar descrição da despesa")
+    print("5 - Editar categoria de despesa")
+    print("6 - Voltar ao menu principal")
+
+def menu_edicao():
+    while True:
+        exibir_menu_edicao()
+        opcao = input("Selecione uma opção")
+
+        if opcao == "1":
+            editar_valor(receitas, "receitas.json", "Receita")
+        elif opcao == "2":
+            editar_valor(despesas, "despesas.json", "Despesa")
+        elif opcao == "3":
+            editar_descricao(receitas, "receitas.json", "Receita")
+        elif opcao == "4":
+            editar_descricao(despesas, "despesas.json", "Despesa")
+        elif opcao == "5":
+            editar_categoria(despesas, "despesas.json")
+        elif opcao == "6":
+            print("Voltando ao menu principal...")
+            break
+        else:
+            print("Opção inválida")
+
+def exibir_menu():  
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
     print("2 - Registrar despesa")
@@ -260,12 +290,8 @@ def exibir_menu():
     print("5 - Relatório por categoria")
     print("6 - Excluir receita")
     print("7 - Excluir despesa")
-    print("8 - Editar receita")
-    print("9 - Editar despesa")
-    print("10 - Editar descrição da receita")
-    print("11 - Editar descrição da despesa")
-    print("12 - Editar categoria de despesa")
-    print("13 - Sair")
+    print("8 - Editar dados")
+    print("9 - Sair")
     
 
 while True:
@@ -299,22 +325,8 @@ while True:
         print("=========== EXCLUIR DESPESAS ===========")
         excluir_dados(despesas, "despesas.json", "Despesa")
     elif opcao == "8":
-        print("=========== EDITAR RECEITAS ===========")
-        editar_valor(receitas, "receitas.json", "Receita")
+        menu_edicao()
     elif opcao == "9":
-        print("=========== EDITAR DESPESAS ===========")
-        editar_valor(despesas, "despesas.json", "Despesa")
-    elif opcao == "10":
-        print("=========== EDITAR DESCRIÇÃO DE RECEITAS ===========")
-        editar_descricao(receitas, "receitas.json", "Receita")
-        break
-    elif opcao == "11":
-        print("=========== EDITAR DESCRIÇÃO DE DESPESAS ===========")
-        editar_descricao(despesas, "despesas.json", "Despesa")
-    elif opcao == "12":
-        print("=========== EDITAR CATEGORIA DE DESPESAS ===========")
-        editar_categoria(despesas, "despesas.json")
-    elif opcao == "13":
         print("Saindo...")
         break
     else:
