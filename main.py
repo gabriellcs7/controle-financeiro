@@ -29,7 +29,9 @@ def registrar_receita():
 
 def listar_receitas():
     for receita in receitas:
-        print(f"Descrição: {receita['descricao']} | Valor: R$ {receita['valor']:.2f}")
+        data = receita.get("data", "Não informada")
+
+        print(f"Descrição: {receita['descricao']} | Valor: R$ {receita['valor']:.2f} | Data: {data}")
 
 def calcular_receitas():
     total = 0
@@ -61,7 +63,9 @@ def registrar_despesa():
 
 def listar_despesas():
     for despesa in despesas:
-        print(f"Descrição: {despesa['descricao']} | Valor: R$ {despesa['valor']:.2f} | Categoria: {despesa['categoria']}")
+        data = despesa.get("data", "Não informada")
+
+        print(f"Descrição: {despesa['descricao']} | Valor: R$ {despesa['valor']:.2f} | Categoria: {despesa['categoria']} | Data: {data}")
 
 def calcular_despesas():
     total = 0
@@ -176,9 +180,12 @@ def excluir_dados(dados, nome_arquivo, tipo):
         if 1 <= opcao <= len(dados):
             item_selecionado = dados[opcao - 1]
 
+            data = item_selecionado.get("data", "Não informada")
+
             print("========== MOVIMENTAÇÃO SELECIONADA ==========")
             print(f"Descrição: {item_selecionado['descricao']}")
             print(f"Valor: R$ {item_selecionado['valor']:.2f}")
+            print(f"Data: {data}")
 
             if "categoria" in item_selecionado:
                 print(f"Categoria: {item_selecionado['categoria']}")
