@@ -352,6 +352,21 @@ def validar_mes():
         except ValueError:
             print("Erro! Digite um número inteiro válido")
 
+def validar_ano():
+    ano_atual = datetime.now().year
+
+    while True:
+        try:
+            ano = int(input("Insira o ano que deseja ver: "))
+
+            if ano < 1900 or ano > ano_atual:
+                print(f"Digite um ano entre 1900 e {ano_atual}.")
+            else:
+                return ano
+
+        except ValueError:
+            print("Erro! DIgite um número inteiro válido")
+
 def relatorio_mensal():
     mes = int(input("Insira o mês que deseja ver: "))
     ano = int(input("Insira o ano que deseja ver: "))
