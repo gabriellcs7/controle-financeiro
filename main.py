@@ -33,11 +33,11 @@ def listar_receitas():
 
         print(f"Descrição: {receita['descricao']} | Valor: R$ {receita['valor']:.2f} | Data: {data}")
 
-def calcular_receitas():
+def calcular_total(dados):
     total = 0
 
-    for receita in receitas:
-        total += receita['valor']
+    for item in dados:
+        total += item['valor']
 
     return total
 
@@ -67,17 +67,9 @@ def listar_despesas():
 
         print(f"Descrição: {despesa['descricao']} | Valor: R$ {despesa['valor']:.2f} | Categoria: {despesa['categoria']} | Data: {data}")
 
-def calcular_despesas():
-    total = 0
-
-    for despesa in despesas:
-        total += despesa['valor']
-
-    return total
-
 def consultar_saldo():
-    total_receitas = calcular_receitas()
-    total_despesas = calcular_despesas()
+    total_receitas = calcular_total(receitas)
+    total_despesas = calcular_total(despesas)
 
     saldo = total_receitas - total_despesas
 
@@ -190,7 +182,7 @@ def excluir_dados(dados, nome_arquivo, tipo):
             if "categoria" in item_selecionado:
                 print(f"Categoria: {item_selecionado['categoria']}")
 
-            confirmacao = input(f"Deseja realmente excluir essa {tipo.lower}? (s/n): ").strip().lower()
+            confirmacao = input(f"Deseja realmente excluir essa {tipo.lower()}? (s/n): ").strip().lower()
             if confirmacao == "s":
                 dados.pop(opcao - 1)
                 salvar_dados(nome_arquivo, dados)
@@ -403,11 +395,11 @@ while True:
         print("=========== RECEITAS CADASTRADAS ===========")
         listar_receitas()
         print("--------------------------------------------")
-        print(f"Total de receitas: R$ {calcular_receitas():.2f}")
+        print(f"Total de receitas: R$ {calcular_total(receitas):.2f}")
         print("=========== DESPESAS CADASTRADAS ===========")
         listar_despesas()
         print("--------------------------------------------")
-        print(f"Total de despesas: R$ {calcular_despesas():.2f}")
+        print(f"Total de despesas: R$ {calcular_total(despesas):.2f}")
     elif opcao == "5":
         relatorio_categorias()
     elif opcao == "6":
