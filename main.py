@@ -340,6 +340,18 @@ def filtrar_por_mes(dados, mes, ano):
             
     return movimentacoes_filtradas
 
+def validar_mes():
+    while True:
+        try:
+            mes = int(input("Insira o mês que deseja ver: "))
+
+            if mes < 1 or mes > 12:
+                print("Digite umm mês entre 1 e 12.")
+            else:
+                return mes
+        except ValueError:
+            print("Erro! Digite um número inteiro válido")
+
 def relatorio_mensal():
     mes = int(input("Insira o mês que deseja ver: "))
     ano = int(input("Insira o ano que deseja ver: "))
