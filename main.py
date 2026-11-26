@@ -365,6 +365,17 @@ def relatorio_mensal():
 
         print(f"Descrição: {despesa['descricao']} | Valor: {despesa['valor']:.2f} | Categoria: {despesa['categoria']} | Data: {data}")
 
+    total_receitas = calcular_total(receitas_filtradas)
+    total_despesas = calcular_total(despesas_filtradas)
+
+    saldo_mensal = total_receitas - total_despesas
+
+    print("========== RESUMO MENSAL ==========")
+
+    print(f"Total de receitas: {total_receitas}")
+    print(f"Total de despesas: {total_despesas}")
+    print(f"Saldo mensal: {saldo_mensal}")
+
 def exibir_menu():  
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
