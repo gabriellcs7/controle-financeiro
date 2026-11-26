@@ -329,6 +329,26 @@ def menu_exclusao():
         else: 
             print("Opção inválida")
 
+def filtrar_por_mes(dados, mes, ano):
+    movimentacoes_filtradas = []
+
+    for item in dados:
+        data = item.get("data")
+
+        if not data:
+            continue
+
+        partes = data.split("/")
+
+        mes_item = int(partes[1])
+        ano_item = int(partes[2])
+
+        if mes_item == mes and ano_item == ano:
+            movimentacoes_filtradas.append(item)
+            
+    return movimentacoes_filtradas
+
+
 def exibir_menu():  
     print("========== CONTROLE FINANCEIRO ==========")
     print("1 - Registrar receita")
