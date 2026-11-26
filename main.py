@@ -368,8 +368,8 @@ def validar_ano():
             print("Erro! DIgite um número inteiro válido")
 
 def relatorio_mensal():
-    mes = int(input("Insira o mês que deseja ver: "))
-    ano = int(input("Insira o ano que deseja ver: "))
+    mes = validar_mes()
+    ano = validar_ano()
 
     receitas_filtradas = filtrar_por_mes(receitas, mes, ano)
     despesas_filtradas = filtrar_por_mes(despesas, mes, ano)
