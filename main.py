@@ -348,6 +348,30 @@ def filtrar_por_mes(dados, mes, ano):
             
     return movimentacoes_filtradas
 
+def relatorio_mensal():
+    mes = int(input("Insira o mês que deseja ver: "))
+    ano = int(input("Insira o ano que deseja ver: "))
+
+    receitas_filtradas = filtrar_por_mes(receitas, mes, ano)
+    despesas_filtradas = filtrar_por_mes(despesas, mes, ano)
+
+    print(f"========== RECEITAS DE {mes}/{ano} ==========")
+    if not receitas_filtradas:
+        print("Nenhuma receita encontrada esse mês.")
+    
+    for receita in receitas_filtradas:
+        data = receita.get("data", "Não informada")
+
+        print(f"Descrição: {receita['descricao']} | Valor: {receita['valor']:.2f} | Data: {data}")
+
+    print(f"========== DESPESAS DE {mes}/{ano} ==========")
+    if not despesas_filtradas:
+        print("Nenhuma despesa encontrada esse mês.")
+    
+    for despesa in despesas_filtradas:
+        data = despesa.get("data", "Não informada")
+
+        print(f"Descrição: {despesa['descricao']} | Valor: {despesa['valor']:.2f} | Categoria: {despesa['categoria']} | Data: {data}")
 
 def exibir_menu():  
     print("========== CONTROLE FINANCEIRO ==========")
@@ -358,7 +382,8 @@ def exibir_menu():
     print("5 - Relatório por categoria")
     print("6 - Excluir dados")
     print("7 - Editar dados")
-    print("8 - Sair")
+    print("8 - Puxar por relatório mensal")
+    print("9 - Sair")
     
 
 while True:
@@ -390,6 +415,8 @@ while True:
     elif opcao == "7":
         menu_edicao()
     elif opcao == "8":
+        relatorio_mensal()
+    elif opcao == "9":
         print("Saindo...")
         break
     else:
